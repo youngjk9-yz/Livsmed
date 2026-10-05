@@ -740,37 +740,10 @@ html, body {
   border-bottom: 1px solid var(--border-light);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 0 20px;
   flex-shrink: 0;
   z-index: 20;
-}
-
-.preview-toolbar-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.preview-badge {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--livsmed-navy);
-}
-
-.dot-green {
-  width: 7px;
-  height: 7px;
-  background-color: var(--color-success);
-  border-radius: 50%;
-}
-
-.doc-info-text {
-  font-size: 11.5px;
-  color: var(--text-muted);
 }
 
 .preview-toolbar-right {
