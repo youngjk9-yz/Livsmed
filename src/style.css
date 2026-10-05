@@ -655,6 +655,31 @@ html, body {
   box-shadow: 0 0 0 2px var(--livsmed-cyan-soft);
 }
 
+.products-grand-total-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, rgba(13, 40, 71, 0.05) 0%, rgba(0, 156, 219, 0.1) 100%);
+  border: 1px solid rgba(0, 156, 219, 0.3);
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+
+.products-grand-total-summary .summary-label {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--livsmed-navy);
+  letter-spacing: 0.2px;
+}
+
+.products-grand-total-summary .summary-value {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--livsmed-navy);
+}
+
 .product-catalog-hint {
   display: flex;
   align-items: flex-start;
@@ -1108,6 +1133,28 @@ html, body {
 
 .td-total {
   text-align: left;
+  padding-left: 10px !important;
+}
+
+.products-table tfoot td {
+  height: 26px;
+  padding: 3px 8px;
+  font-size: 10.5pt;
+  font-weight: 700;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+}
+
+.td-total-label {
+  text-align: right;
+  font-weight: 700;
+  padding-right: 14px !important;
+  letter-spacing: 0.2px;
+}
+
+.td-total-amount {
+  text-align: left;
+  font-weight: 700;
   padding-left: 10px !important;
 }
 

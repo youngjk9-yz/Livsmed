@@ -157,6 +157,11 @@
                   <!-- Product row items inserted dynamically -->
                 </div>
 
+                <div class="products-grand-total-summary" id="form-products-grand-total-container" style="display: none;">
+                  <span class="summary-label">Total Quote Pricing:</span>
+                  <span class="summary-value" id="form-products-grand-total-val">$0.00</span>
+                </div>
+
                 <div class="product-catalog-hint">
                   <svg class="hint-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10"/>
@@ -345,6 +350,12 @@
                     <tbody id="preview-products-tbody">
                       <!-- Product data rows generated dynamically -->
                     </tbody>
+                    <tfoot>
+                      <tr class="tr-products-total">
+                        <td colspan="4" class="td-total-label">Total</td>
+                        <td class="td-total td-total-amount" id="preview-products-grand-total">&nbsp;</td>
+                      </tr>
+                    </tfoot>
                   </table>
                 </div>
 

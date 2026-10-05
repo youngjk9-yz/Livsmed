@@ -69,6 +69,9 @@ const dom = {
   previewContactPhone: document.getElementById('preview-contact-phone'),
   previewIdnAgreement: document.getElementById('preview-idn-agreement'),
   previewProductsTbody: document.getElementById('preview-products-tbody'),
+  previewProductsGrandTotal: document.getElementById('preview-products-grand-total'),
+  formGrandTotalContainer: document.getElementById('form-products-grand-total-container'),
+  formGrandTotalVal: document.getElementById('form-products-grand-total-val'),
   previewCommentsContent: document.getElementById('preview-comments-content'),
   previewRepName: document.getElementById('preview-rep-name'),
   previewRepEmail: document.getElementById('preview-rep-email'),
@@ -363,6 +366,32 @@ function calculateRowTotal(qty, price) {
 }
 
 /**
+ * Calculates the grand total pricing across all products in the quote.
+ * Formats as currency (e.g. $12,850.00). Returns '' if no items have valid pricing.
+ */
+function calculateGrandTotal(products) {
+  if (!products || !products.length) return '';
+  let sum = 0;
+  let hasValidItem = false;
+
+  products.forEach(item => {
+    if (!item.qty || !item.price) return;
+    const numQty = parseFloat(String(item.qty).replace(/[^0-9.]/g, ''));
+    const numPrice = parseFloat(String(item.price).replace(/[^0-9.]/g, ''));
+    if (!isNaN(numQty) && !isNaN(numPrice) && numQty > 0 && numPrice > 0) {
+      sum += (numQty * numPrice);
+      hasValidItem = true;
+    }
+  });
+
+  if (!hasValidItem || sum <= 0) return '';
+  return '$' + sum.toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+}
+
+/**
  * Renders the products in the PDF document table.
  * Crucial: Always fills empty blank rows to reach a minimum of 7 total rows,
  * matching the exact visual height and structure of the original attached template!
@@ -400,6 +429,20 @@ function renderDocumentProductsTable() {
       <td class="td-total">&nbsp;</td>
     `;
     dom.previewProductsTbody.appendChild(tr);
+  }
+
+  // 3. Update bottom Total row and Form Editor total summary
+  const grandTotal = calculateGrandTotal(items);
+  if (dom.previewProductsGrandTotal) {
+    dom.previewProductsGrandTotal.innerHTML = escapeHtml(grandTotal) || '&nbsp;';
+  }
+  if (dom.formGrandTotalContainer && dom.formGrandTotalVal) {
+    if (grandTotal) {
+      dom.formGrandTotalContainer.style.display = 'flex';
+      dom.formGrandTotalVal.textContent = grandTotal;
+    } else {
+      dom.formGrandTotalContainer.style.display = 'none';
+    }
   }
 }
 
