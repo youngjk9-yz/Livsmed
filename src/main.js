@@ -293,9 +293,11 @@ function setupEventListeners() {
 
   dom.btnDownloadPdf.addEventListener('click', handlePdfDownload);
   dom.btnQuickDownload.addEventListener('click', handlePdfDownload);
-  dom.btnPrintQuote.addEventListener('click', () => {
-    printQuotePDF();
-  });
+  if (dom.btnPrintQuote) {
+    dom.btnPrintQuote.addEventListener('click', () => {
+      printQuotePDF();
+    });
+  }
 
   // Zoom Controls
   dom.btnZoomIn.addEventListener('click', () => setZoom(state.zoomLevel + 0.1));
