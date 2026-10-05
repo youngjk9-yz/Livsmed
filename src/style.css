@@ -449,6 +449,8 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  min-width: 0;
+  width: 100%;
 }
 
 .form-group label {
@@ -460,14 +462,17 @@ html, body {
 .form-group input,
 .form-group select,
 .form-group textarea {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   font-family: var(--font-ui);
   font-size: 13.5px;
   color: var(--text-main);
   background-color: #ffffff;
   border: 1.5px solid var(--border-mid);
   border-radius: var(--radius-sm);
-  padding: 10px 12px;
-  min-height: 42px;
+  padding: 9px 11px;
+  min-height: 40px;
   box-sizing: border-box;
   outline: none;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
@@ -582,13 +587,31 @@ html, body {
 
 .product-details-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: minmax(0, 1.25fr) 78px minmax(0, 1.35fr);
   gap: 8px;
+  align-items: start;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.product-details-grid .form-group {
+  min-width: 0;
 }
 
 .product-details-grid .form-group label {
-  font-size: 10.5px;
-  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--livsmed-navy);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.product-details-grid .form-group input,
+.product-details-grid .form-group select {
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .product-catalog-hint {
