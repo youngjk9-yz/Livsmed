@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LIVSMED — Quote Request Form & PDF Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/style.css">
+  </head>
+  <body>
+    <div id="app" class="app-root">
+      <!-- Top Brand Navigation Bar -->
+      <header class="top-nav no-print">
+        <div class="nav-brand">
+          <div class="nav-logo-mark">
+            <span class="logo-liv">LIV</span><span class="logo-slash">'</span><span class="logo-smed">SMED</span>
+          </div>
+          <div class="nav-brand-divider"></div>
+          <div class="nav-title-group">
+            <h1 class="nav-title">Quote Request Generator</h1>
+            <span class="nav-badge">Medical Device Portal</span>
+          </div>
+        </div>
+
+        <div class="nav-actions">
+          <button id="btn-manage-catalog" class="btn btn-secondary" title="Customize product descriptions and default codes for the dropdown">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+            <span>Manage Products (<span id="catalog-count-badge">13</span>)</span>
+          </button>
+
+          <button id="btn-load-sample" class="btn btn-ghost" title="Load sample quote from Loma Linda University">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            <span>Load Sample</span>
+          </button>
+
+          <button id="btn-clear-form" class="btn btn-ghost" title="Clear all input fields">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="3 6 5 6 21 6"/>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+            </svg>
+            <span>Clear</span>
+          </button>
+
+          <div class="nav-actions-separator"></div>
+
+          <button id="btn-print-quote" class="btn btn-outline" title="Print directly or save with browser's high-definition PDF driver">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 6 2 18 2 18 9"/>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+              <rect x="6" y="14" width="12" height="8"/>
+            </svg>
+            <span>Print / Save PDF</span>
+          </button>
+
+          <button id="btn-download-pdf" class="btn btn-primary" title="Export exact PDF replica of the Quote Request Form">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="12" y1="18" x2="12" y2="12"/>
+              <polyline points="9 15 12 18 15 15"/>
+            </svg>
+            <span id="btn-download-label">Download PDF</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Workspace (Editor + Live Preview) -->
+      <main class="workspace-layout">
+        <!-- Left Panel: Form Editor -->
+        <aside class="editor-sidebar no-print">
+          <div class="editor-header">
+            <div class="editor-header-title">
+              <h2>Quote Configuration</h2>
+              <p>Fill out the fields below. Live preview updates instantly.</p>
+            </div>
+            <span class="live-sync-pill"><span class="pulse-dot"></span> Live Sync</span>
+          </div>
+
+          <div class="editor-scrollable">
+            <!-- Section 1: General & Date -->
+            <section class="form-card">
+              <div class="form-card-header">
+                <span class="step-num">1</span>
+                <h3>General & Date</h3>
+              </div>
+              <div class="form-card-body">
+                <div class="form-row">
+                  <div class="form-group flex-1">
+                    <label for="input-quote-date">Date of Quote</label>
+                    <div class="input-with-action">
+                      <input type="text" id="input-quote-date" placeholder="e.g. 9/18/2026" value="9/18/2026" />
+                      <button type="button" id="btn-set-today" class="btn-input-addon" title="Set to today's date">Today</button>
+                    </div>
+                  </div>
+
+                  <div class="form-group flex-1">
+                    <label for="input-idn-agreement">IDN Pricing Agreement (Y/N)</label>
+                    <select id="input-idn-agreement" class="form-select">
+                      <option value="Y" selected>Y — Yes, part of existing IDN</option>
+                      <option value="N">N — No IDN agreement</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Section 2: Quote For (Hospital / SOC) -->
+            <section class="form-card">
+              <div class="form-card-header">
+                <span class="step-num">2</span>
+                <h3>Quote For (Hospital / Facility)</h3>
+              </div>
+              <div class="form-card-body">
+                <div class="form-group">
+                  <label for="input-customer-name">Facility / Hospital Name</label>
+                  <input type="text" id="input-customer-name" placeholder="e.g. Loma Linda University" value="Loma Linda University" />
+                </div>
+                <div class="form-group">
+                  <label for="input-soc-number">SOC # (Sales Order / Account #)</label>
+                  <input type="text" id="input-soc-number" placeholder="e.g. 303406138" value="303406138" />
+                </div>
+              </div>
+            </section>
+
+            <!-- Section 3: Contact Information -->
+            <section class="form-card">
+              <div class="form-card-header">
+                <span class="step-num">3</span>
+                <h3>Contact Information</h3>
+              </div>
+              <div class="form-card-body">
+                <div class="form-group">
+                  <label for="input-contact-name">Key Contact Name</label>
+                  <input type="text" id="input-contact-name" placeholder="e.g. Karen Gruhn" value="Karen Gruhn" />
+                </div>
+                <div class="form-row">
+                  <div class="form-group flex-1">
+                    <label for="input-contact-title">Title / Department</label>
+                    <input type="text" id="input-contact-title" placeholder="e.g. Director of Value Analysis" value="Director of Value Analysis" />
+                  </div>
+                  <div class="form-group flex-1">
+                    <label for="input-contact-phone">Phone Number</label>
+                    <input type="text" id="input-contact-phone" placeholder="e.g. tel:909-558-4081" value="tel:909-558-4081" />
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Section 4: Products & Quantities -->
+            <section class="form-card highlight-card">
+              <div class="form-card-header">
+                <div class="form-card-header-left">
+                  <span class="step-num">4</span>
+                  <div>
+                    <h3>Products & Quantities</h3>
+                    <p class="section-subtext">Product Description & Qty are selected via dropdowns</p>
+                  </div>
+                </div>
+                <button type="button" id="btn-add-product" class="btn btn-sm btn-primary">
+                  <svg class="btn-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"/>
+                    <line x1="5" y1="12" x2="19" y2="12"/>
+                  </svg>
+                  <span>Add Product</span>
+                </button>
+              </div>
+
+              <div class="form-card-body">
+                <div id="products-form-list" class="products-form-list">
+                  <!-- Product row items inserted dynamically -->
+                </div>
+
+                <div class="product-catalog-hint">
+                  <svg class="hint-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="16" x2="12" y2="12"/>
+                    <line x1="12" y1="8" x2="12.01" y2="8"/>
+                  </svg>
+                  <span>Need to add different products to the dropdown? Click <button type="button" class="inline-link-btn" id="link-open-catalog">Manage Product Catalog</button> to add your exact models and pricing.</span>
+                </div>
+              </div>
+            </section>
+
+            <!-- Section 5: Comments & Notes -->
+            <section class="form-card">
+              <div class="form-card-header">
+                <span class="step-num">5</span>
+                <h3>Comments / Additional Notes</h3>
+              </div>
+              <div class="form-card-body">
+                <div class="form-group">
+                  <label for="input-comments">Notes to include in the quote (leave empty for blank lined box)</label>
+                  <textarea id="input-comments" rows="3" placeholder="Enter special delivery instructions, tier pricing terms, or leave blank to keep original format..."></textarea>
+                </div>
+              </div>
+            </section>
+
+            <!-- Section 6: Sales Rep Information -->
+            <section class="form-card">
+              <div class="form-card-header">
+                <span class="step-num">6</span>
+                <h3>LivsMed Sales Rep Information</h3>
+              </div>
+              <div class="form-card-body">
+                <div class="form-group">
+                  <label for="input-rep-name">Sales Rep Name</label>
+                  <input type="text" id="input-rep-name" placeholder="e.g. Gerry Giuliano" value="Gerry Giuliano" />
+                </div>
+                <div class="form-row">
+                  <div class="form-group flex-1">
+                    <label for="input-rep-email">Email Address</label>
+                    <input type="email" id="input-rep-email" placeholder="e.g. Gerry_giuliano@livsmed.com" value="Gerry_giuliano@livsmed.com" />
+                  </div>
+                  <div class="form-group flex-1">
+                    <label for="input-rep-phone">Phone</label>
+                    <input type="text" id="input-rep-phone" placeholder="e.g. 908 328 2809" value="908 328 2809" />
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </aside>
+
+        <!-- Right Panel: Live Document Preview -->
+        <section class="preview-panel">
+          <div class="preview-toolbar no-print">
+            <div class="preview-toolbar-left">
+              <div class="preview-badge">
+                <span class="dot-green"></span>
+                <span>PDF Format (1:1 Document Replica)</span>
+              </div>
+              <span class="doc-info-text">Letter 8.5" &times; 11" &bull; Print Ready</span>
+            </div>
+
+            <div class="preview-toolbar-right">
+              <div class="zoom-controls">
+                <button type="button" id="btn-zoom-out" class="btn-icon-only" title="Zoom Out">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </button>
+                <span id="zoom-level-label">100%</span>
+                <button type="button" id="btn-zoom-in" class="btn-icon-only" title="Zoom In">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </button>
+                <button type="button" id="btn-zoom-fit" class="btn-text-only" title="Fit to Screen">Fit</button>
+              </div>
+
+              <button type="button" id="btn-quick-download" class="btn btn-sm btn-primary">
+                <svg class="btn-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                <span>Download PDF</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Document Canvas Area -->
+          <div class="document-canvas-container" id="document-canvas-container">
+            <div class="document-zoom-wrapper" id="document-zoom-wrapper">
+              <!-- Exact Letter Page Representation (Target for PDF Generation) -->
+              <article class="quote-document-sheet" id="quote-document-sheet">
+                <!-- Header: LivsMed Logo (Left) & Address (Right) -->
+                <header class="doc-header">
+                  <div class="doc-logo-container">
+                    <!-- Crisp LivsMed Vector Logo -->
+                    <div class="livsmed-brand-logo">
+                      <span class="doc-liv">LIV</span><span class="doc-slash">'</span><span class="doc-smed">SMED</span>
+                    </div>
+                  </div>
+
+                  <div class="doc-company-info">
+                    <div class="comp-line comp-name">LivsMed Inc.</div>
+                    <div class="comp-line">2305 Historic Decatur Rd.</div>
+                    <div class="comp-line">Suite 100, San Diego, CA</div>
+                    <div class="comp-line comp-email"><a href="mailto:orderUSA@livsmed.com">orderUSA@livsmed.com</a></div>
+                  </div>
+                </header>
+
+                <!-- Document Title: Quote Request Form -->
+                <div class="doc-title-section">
+                  <h2 class="doc-main-title">Quote Request Form</h2>
+                </div>
+
+                <!-- Date of Quote Table -->
+                <div class="doc-section doc-section-date">
+                  <table class="doc-table doc-table-full date-table">
+                    <tbody>
+                      <tr>
+                        <td class="cell-label date-label-cell">Date of Quote</td>
+                        <td class="cell-val date-val-cell" id="preview-quote-date">9/18/2026</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Quote For Section (Partial Width Box) -->
+                <div class="doc-section doc-section-quote-for">
+                  <div class="doc-section-heading">Quote for:</div>
+                  <table class="doc-table doc-table-soc">
+                    <tbody>
+                      <tr>
+                        <td class="cell-label soc-label-cell">SOC #</td>
+                        <td class="cell-val soc-val-cell">
+                          <div id="preview-customer-name" class="soc-customer-line">Loma Linda University</div>
+                          <div id="preview-soc-number" class="soc-number-line">303406138</div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Contact Information Section (Partial Width Box) -->
+                <div class="doc-section doc-section-contact">
+                  <div class="doc-section-heading">Contact Information</div>
+                  <table class="doc-table doc-table-contact">
+                    <tbody>
+                      <tr>
+                        <td class="cell-label contact-label-cell">Key Contact<br>Name</td>
+                        <td class="cell-val contact-val-cell" id="preview-contact-name">Karen Gruhn</td>
+                      </tr>
+                      <tr>
+                        <td class="cell-label contact-label-cell">Title</td>
+                        <td class="cell-val contact-val-cell" id="preview-contact-title">Director of Value Analysis</td>
+                      </tr>
+                      <tr>
+                        <td class="cell-label contact-label-cell">Phone</td>
+                        <td class="cell-val contact-val-cell" id="preview-contact-phone">tel:909-558-4081</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- IDN Pricing Agreement Section (Full Width) -->
+                <div class="doc-section doc-section-idn">
+                  <table class="doc-table doc-table-full idn-table">
+                    <tbody>
+                      <tr>
+                        <td class="cell-label idn-label-cell">
+                          Is hospital part of existing IDN pricing agreement<br>
+                          <span class="idn-sublabel">(Y/N)</span>
+                        </td>
+                        <td class="cell-val idn-val-cell" id="preview-idn-agreement">Y</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Products Table (Full Width, minimum 7 rows matching the original document) -->
+                <div class="doc-section doc-section-products">
+                  <table class="doc-table doc-table-full products-table">
+                    <thead>
+                      <tr>
+                        <th class="th-code">Product<br>Code</th>
+                        <th class="th-desc">Product Description</th>
+                        <th class="th-qty">Qty<br>(Case)</th>
+                        <th class="th-price">Requested<br>Pricing/case</th>
+                      </tr>
+                    </thead>
+                    <tbody id="preview-products-tbody">
+                      <!-- Product data rows generated dynamically -->
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Comments / Additional Notes Section -->
+                <div class="doc-section doc-section-comments">
+                  <div class="doc-section-heading">Comments/Additional Notes to include in the quote:</div>
+                  <div class="doc-box doc-comments-box">
+                    <div id="preview-comments-content" class="comments-text"></div>
+                    <div class="comments-line-divider"></div>
+                  </div>
+                </div>
+
+                <!-- LivsMed Sales Rep Information Section (Partial Width Box) -->
+                <div class="doc-section doc-section-rep">
+                  <div class="doc-section-heading">LivsMed Sales Rep Information</div>
+                  <table class="doc-table doc-table-rep">
+                    <tbody>
+                      <tr>
+                        <td class="cell-label rep-label-cell">Name</td>
+                        <td class="cell-val rep-val-cell" id="preview-rep-name">Gerry Giuliano</td>
+                      </tr>
+                      <tr>
+                        <td class="cell-label rep-label-cell">Email Address</td>
+                        <td class="cell-val rep-val-cell" id="preview-rep-email">
+                          <a href="mailto:Gerry_giuliano@livsmed.com">Gerry_giuliano@livsmed.com</a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="cell-label rep-label-cell">Phone</td>
+                        <td class="cell-val rep-val-cell" id="preview-rep-phone">908 328 2809</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Manage Product Catalog Modal -->
+      <div id="catalog-modal" class="modal-backdrop no-print" style="display: none;">
+        <div class="modal-dialog">
+          <div class="modal-header">
+            <div class="modal-title-group">
+              <div class="modal-icon-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                  <line x1="8" y1="21" x2="16" y2="21"/>
+                  <line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="modal-title">Product Catalog Manager</h3>
+                <p class="modal-subtitle">Manage products available in the Product Description dropdown menu</p>
+              </div>
+            </div>
+            <button type="button" id="btn-close-catalog-modal" class="modal-close-btn" aria-label="Close modal">&times;</button>
+          </div>
+
+          <div class="modal-body">
+            <div class="catalog-add-box">
+              <h4>Add New Product to Dropdown</h4>
+              <div class="catalog-add-grid">
+                <div class="form-group">
+                  <label for="new-prod-code">Product Code</label>
+                  <input type="text" id="new-prod-code" placeholder="e.g. 5AFF02-LP" />
+                </div>
+                <div class="form-group flex-2">
+                  <label for="new-prod-desc">Product Description</label>
+                  <input type="text" id="new-prod-desc" placeholder="e.g. ArtiSential Fenestrated Forcep 30cm" />
+                </div>
+                <div class="form-group">
+                  <label for="new-prod-price">Default Price ($)</label>
+                  <input type="number" id="new-prod-price" placeholder="1925" />
+                </div>
+                <div class="form-group form-group-btn">
+                  <button type="button" id="btn-save-new-product" class="btn btn-primary btn-block">
+                    <span>+ Add to Catalog</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="catalog-table-container">
+              <div class="catalog-table-header">
+                <h4>Current Products in Dropdown (<span id="modal-catalog-count">0</span>)</h4>
+                <div class="catalog-table-actions">
+                  <button type="button" id="btn-export-catalog-json" class="btn-text-link">Export JSON</button>
+                  <span class="sep">&bull;</span>
+                  <button type="button" id="btn-import-catalog-json" class="btn-text-link">Import JSON</button>
+                  <span class="sep">&bull;</span>
+                  <button type="button" id="btn-reset-catalog" class="btn-text-link text-danger">Reset to Defaults</button>
+                </div>
+              </div>
+
+              <div class="table-responsive">
+                <table class="catalog-data-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 25%;">Product Code</th>
+                      <th style="width: 45%;">Product Description</th>
+                      <th style="width: 20%;">Default Price</th>
+                      <th style="width: 10%; text-align: center;">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="catalog-items-tbody">
+                    <!-- Populated dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <span class="modal-footer-note">All catalog edits are saved automatically in your browser.</span>
+            <button type="button" id="btn-done-catalog-modal" class="btn btn-primary">Done</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Toast Notification Container -->
+      <div id="toast-container" class="toast-container no-print" aria-live="polite"></div>
+    </div>
+
+    <!-- Hidden file input for catalog import -->
+    <input type="file" id="catalog-file-input" accept=".json" style="display: none;" />
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
