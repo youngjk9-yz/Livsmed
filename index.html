@@ -77,7 +77,7 @@
                 <div class="form-group">
                   <label for="input-quote-date">Date of Quote</label>
                   <div class="input-with-action">
-                    <input type="text" id="input-quote-date" placeholder="e.g. 9/18/2026" value="9/18/2026" />
+                    <input type="text" id="input-quote-date" placeholder="e.g. 9/18/2026" value="" />
                     <button type="button" id="btn-set-today" class="btn-input-addon" title="Set to today's date">Today</button>
                   </div>
                 </div>
@@ -85,8 +85,8 @@
                 <div class="form-group">
                   <label for="input-idn-agreement">Is hospital part of existing IDN pricing agreement? (Y/N)</label>
                   <select id="input-idn-agreement" class="form-select">
-                    <option value="">-- Select (Y/N) --</option>
-                    <option value="Y" selected>Y — Yes (Part of existing IDN agreement)</option>
+                    <option value="" selected>-- Select (Y/N) --</option>
+                    <option value="Y">Y — Yes (Part of existing IDN agreement)</option>
                     <option value="N">N — No (Standard pricing)</option>
                   </select>
                 </div>
@@ -102,11 +102,11 @@
               <div class="form-card-body">
                 <div class="form-group">
                   <label for="input-customer-name">Facility / Hospital Name</label>
-                  <input type="text" id="input-customer-name" placeholder="e.g. Loma Linda University" value="Loma Linda University" />
+                  <input type="text" id="input-customer-name" placeholder="e.g. Loma Linda University" value="" />
                 </div>
                 <div class="form-group">
                   <label for="input-soc-number">SOC # (Sales Order / Account #)</label>
-                  <input type="text" id="input-soc-number" placeholder="e.g. 303406138" value="303406138" />
+                  <input type="text" id="input-soc-number" placeholder="e.g. 303406138" value="" />
                 </div>
               </div>
             </section>
@@ -120,15 +120,15 @@
               <div class="form-card-body">
                 <div class="form-group">
                   <label for="input-contact-name">Key Contact Name</label>
-                  <input type="text" id="input-contact-name" placeholder="e.g. Karen Gruhn" value="Karen Gruhn" />
+                  <input type="text" id="input-contact-name" placeholder="e.g. Karen Gruhn" value="" />
                 </div>
                 <div class="form-group">
                   <label for="input-contact-title">Title / Department</label>
-                  <input type="text" id="input-contact-title" placeholder="e.g. Director of Value Analysis" value="Director of Value Analysis" />
+                  <input type="text" id="input-contact-title" placeholder="e.g. Director of Value Analysis" value="" />
                 </div>
                 <div class="form-group">
                   <label for="input-contact-phone">Phone Number</label>
-                  <input type="text" id="input-contact-phone" placeholder="e.g. tel:909-558-4081" value="tel:909-558-4081" />
+                  <input type="text" id="input-contact-phone" placeholder="e.g. tel:909-558-4081" value="" />
                 </div>
               </div>
             </section>
@@ -191,15 +191,15 @@
               <div class="form-card-body">
                 <div class="form-group">
                   <label for="input-rep-name">Sales Rep Name</label>
-                  <input type="text" id="input-rep-name" placeholder="e.g. Gerry Giuliano" value="Gerry Giuliano" />
+                  <input type="text" id="input-rep-name" placeholder="e.g. Gerry Giuliano" value="" />
                 </div>
                 <div class="form-group">
                   <label for="input-rep-email">Email Address</label>
-                  <input type="email" id="input-rep-email" placeholder="e.g. Gerry_giuliano@livsmed.com" value="Gerry_giuliano@livsmed.com" />
+                  <input type="email" id="input-rep-email" placeholder="e.g. Gerry_giuliano@livsmed.com" value="" />
                 </div>
                 <div class="form-group">
                   <label for="input-rep-phone">Phone Number</label>
-                  <input type="text" id="input-rep-phone" placeholder="e.g. 908 328 2809" value="908 328 2809" />
+                  <input type="text" id="input-rep-phone" placeholder="e.g. 908 328 2809" value="" />
                 </div>
               </div>
             </section>
@@ -273,7 +273,7 @@
                     <tbody>
                       <tr>
                         <td class="cell-label date-label-cell">Date of Quote</td>
-                        <td class="cell-val date-val-cell" id="preview-quote-date">9/18/2026</td>
+                        <td class="cell-val date-val-cell" id="preview-quote-date"></td>
                       </tr>
                     </tbody>
                   </table>
@@ -287,8 +287,8 @@
                       <tr>
                         <td class="cell-label soc-label-cell">SOC #</td>
                         <td class="cell-val soc-val-cell">
-                          <div id="preview-customer-name" class="soc-customer-line">Loma Linda University</div>
-                          <div id="preview-soc-number" class="soc-number-line">303406138</div>
+                          <div id="preview-customer-name" class="soc-customer-line"></div>
+                          <div id="preview-soc-number" class="soc-number-line"></div>
                         </td>
                       </tr>
                     </tbody>
@@ -302,15 +302,15 @@
                     <tbody>
                       <tr>
                         <td class="cell-label contact-label-cell">Key Contact<br>Name</td>
-                        <td class="cell-val contact-val-cell" id="preview-contact-name">Karen Gruhn</td>
+                        <td class="cell-val contact-val-cell" id="preview-contact-name"></td>
                       </tr>
                       <tr>
                         <td class="cell-label contact-label-cell">Title</td>
-                        <td class="cell-val contact-val-cell" id="preview-contact-title">Director of Value Analysis</td>
+                        <td class="cell-val contact-val-cell" id="preview-contact-title"></td>
                       </tr>
                       <tr>
                         <td class="cell-label contact-label-cell">Phone</td>
-                        <td class="cell-val contact-val-cell" id="preview-contact-phone">tel:909-558-4081</td>
+                        <td class="cell-val contact-val-cell" id="preview-contact-phone"></td>
                       </tr>
                     </tbody>
                   </table>
@@ -324,7 +324,7 @@
                         <td class="cell-label idn-label-cell">
                           Is hospital part of existing IDN pricing agreement (Y/N)?
                         </td>
-                        <td class="cell-val idn-val-cell" id="preview-idn-agreement">Y</td>
+                        <td class="cell-val idn-val-cell" id="preview-idn-agreement"></td>
                       </tr>
                     </tbody>
                   </table>
@@ -362,17 +362,15 @@
                     <tbody>
                       <tr>
                         <td class="cell-label rep-label-cell">Name</td>
-                        <td class="cell-val rep-val-cell" id="preview-rep-name">Gerry Giuliano</td>
+                        <td class="cell-val rep-val-cell" id="preview-rep-name"></td>
                       </tr>
                       <tr>
                         <td class="cell-label rep-label-cell">Email Address</td>
-                        <td class="cell-val rep-val-cell" id="preview-rep-email">
-                          <a href="mailto:Gerry_giuliano@livsmed.com">Gerry_giuliano@livsmed.com</a>
-                        </td>
+                        <td class="cell-val rep-val-cell" id="preview-rep-email"></td>
                       </tr>
                       <tr>
                         <td class="cell-label rep-label-cell">Phone</td>
-                        <td class="cell-val rep-val-cell" id="preview-rep-phone">908 328 2809</td>
+                        <td class="cell-val rep-val-cell" id="preview-rep-phone"></td>
                       </tr>
                     </tbody>
                   </table>

@@ -6,26 +6,26 @@ import { downloadQuotePDF, printQuotePDF } from './pdf.js';
 // State Management
 // ============================================================================
 
-const SAMPLE_DATA = {
-  quoteDate: '9/18/2026',
-  customerName: 'Loma Linda University',
-  socNumber: '303406138',
-  contactName: 'Karen Gruhn',
-  contactTitle: 'Director of Value Analysis',
-  contactPhone: 'tel:909-558-4081',
-  idnAgreement: 'Y',
+const EMPTY_STATE = {
+  quoteDate: '',
+  customerName: '',
+  socNumber: '',
+  contactName: '',
+  contactTitle: '',
+  contactPhone: '',
+  idnAgreement: '',
   products: [
     {
-      code: '5ACF01-LP',
-      description: 'Clinch Forceps-38cm-Lock-Adjustable-Pinch lock',
-      qty: '1',
-      price: '$385.00'
+      code: '',
+      description: '',
+      qty: '',
+      price: ''
     }
   ],
   comments: '',
-  repName: 'Gerry Giuliano',
-  repEmail: 'Gerry_giuliano@livsmed.com',
-  repPhone: '908 328 2809'
+  repName: '',
+  repEmail: '',
+  repPhone: ''
 };
 
 const QTY_OPTIONS = [
@@ -34,7 +34,7 @@ const QTY_OPTIONS = [
 ];
 
 let state = {
-  ...JSON.parse(JSON.stringify(SAMPLE_DATA)),
+  ...JSON.parse(JSON.stringify(EMPTY_STATE)),
   zoomLevel: 1.0,
   catalog: getProductCatalog()
 };
@@ -220,35 +220,11 @@ function setupEventListeners() {
   });
 
   // Clear Form - Clears ALL entries across all sections
-  if (dom.btnLoadSample) {
-    dom.btnLoadSample.addEventListener('click', () => {
-      state = {
-        ...state,
-        ...JSON.parse(JSON.stringify(SAMPLE_DATA))
-      };
-      populateFormFields();
-      renderProductRows();
-      updateLivePreview();
-      showToast('Loaded Loma Linda University quote sample', 'success');
-    });
-  }
-
   dom.btnClearForm.addEventListener('click', () => {
-    state.quoteDate = '';
-    state.customerName = '';
-    state.socNumber = '';
-    state.contactName = '';
-    state.contactTitle = '';
-    state.contactPhone = '';
-    state.idnAgreement = '';
-    state.products = [
-      { code: '', description: '', qty: '', price: '' }
-    ];
-    state.comments = '';
-    state.repName = '';
-    state.repEmail = '';
-    state.repPhone = '';
-
+    state = {
+      ...state,
+      ...JSON.parse(JSON.stringify(EMPTY_STATE))
+    };
     populateFormFields();
     renderProductRows();
     updateLivePreview();
