@@ -199,17 +199,27 @@ function setupEventListeners() {
       description: '',
       defaultPrice: 0
     };
-    state.products.push({
-      code: defaultItem.code,
-      description: defaultItem.description,
-      qty: '1',
-      price: defaultItem.defaultPrice ? formatCurrency(defaultItem.defaultPrice) : ''
-    });
+    // If the list only contains a single completely empty item, populate it instead of appending
+    if (state.products.length === 1 && !state.products[0].code && !state.products[0].description && !state.products[0].price && !state.products[0].qty) {
+      state.products[0] = {
+        code: defaultItem.code,
+        description: defaultItem.description,
+        qty: '1',
+        price: defaultItem.defaultPrice ? formatCurrency(defaultItem.defaultPrice) : ''
+      };
+    } else {
+      state.products.push({
+        code: defaultItem.code,
+        description: defaultItem.description,
+        qty: '1',
+        price: defaultItem.defaultPrice ? formatCurrency(defaultItem.defaultPrice) : ''
+      });
+    }
     renderProductRows();
     updateLivePreview();
   });
 
-  // Clear Form
+  // Clear Form - Clears ALL entries across all sections
   if (dom.btnLoadSample) {
     dom.btnLoadSample.addEventListener('click', () => {
       state = {
@@ -230,15 +240,19 @@ function setupEventListeners() {
     state.contactName = '';
     state.contactTitle = '';
     state.contactPhone = '';
-    state.idnAgreement = 'Y';
+    state.idnAgreement = '';
     state.products = [
-      { code: '', description: '', qty: '1', price: '' }
+      { code: '', description: '', qty: '', price: '' }
     ];
     state.comments = '';
+    state.repName = '';
+    state.repEmail = '';
+    state.repPhone = '';
+
     populateFormFields();
     renderProductRows();
     updateLivePreview();
-    showToast('Form cleared', 'info');
+    showToast('All entries cleared', 'info');
   });
 
   // PDF Export and Print
@@ -369,10 +383,10 @@ function renderDocumentProductsTable() {
   items.forEach(item => {
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td class="td-code">${escapeHtml(item.code || '')}</td>
-      <td class="td-desc">${escapeHtml(item.description || '')}</td>
-      <td class="td-qty">${escapeHtml(item.qty ? String(item.qty) : '')}</td>
-      <td class="td-price">${escapeHtml(item.price || '')}</td>
+      <td class="td-code">${escapeHtml(item.code || '') || '&nbsp;'}</td>
+      <td class="td-desc">${escapeHtml(item.description || '') || '&nbsp;'}</td>
+      <td class="td-qty">${escapeHtml(item.qty ? String(item.qty) : '') || '&nbsp;'}</td>
+      <td class="td-price">${escapeHtml(item.price || '') || '&nbsp;'}</td>
     `;
     dom.previewProductsTbody.appendChild(tr);
   });
@@ -424,12 +438,12 @@ function renderProductRows() {
     `;
 
     // Build Qty dropdown options: 1 to 20, plus Manual Input option at the bottom
-    let qtyOptionsHtml = '';
-    const currentQtyStr = String(prod.qty || '1');
+    let qtyOptionsHtml = '<option value="">-- Select Qty --</option>';
+    const currentQtyStr = (prod.qty !== undefined && prod.qty !== null) ? String(prod.qty) : '';
     let isQtyMatched = false;
 
     QTY_OPTIONS.forEach(opt => {
-      const isSel = (opt === currentQtyStr) ? 'selected' : '';
+      const isSel = (currentQtyStr && opt === currentQtyStr) ? 'selected' : '';
       if (isSel) isQtyMatched = true;
       qtyOptionsHtml += `<option value="${opt}" ${isSel}>${opt}</option>`;
     });

@@ -919,6 +919,13 @@ html, body {
   box-sizing: border-box;
 }
 
+.doc-table td:empty::before,
+.soc-customer-line:empty::before,
+.soc-number-line:empty::before {
+  content: '\00a0';
+  display: inline-block;
+}
+
 /* 1. Date of Quote Table */
 .date-table {
   width: 100%;
