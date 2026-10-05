@@ -347,6 +347,22 @@ function updateLivePreview() {
 }
 
 /**
+ * Calculates line item total pricing based on quantity and unit price.
+ * Formats as currency (e.g. $1,925.00). Returns '' if either qty or price is empty or invalid.
+ */
+function calculateRowTotal(qty, price) {
+  if (!qty || !price) return '';
+  const numQty = parseFloat(String(qty).replace(/[^0-9.]/g, ''));
+  const numPrice = parseFloat(String(price).replace(/[^0-9.]/g, ''));
+  if (isNaN(numQty) || isNaN(numPrice) || numQty <= 0 || numPrice <= 0) return '';
+  const total = numQty * numPrice;
+  return '$' + total.toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+}
+
+/**
  * Renders the products in the PDF document table.
  * Crucial: Always fills empty blank rows to reach a minimum of 7 total rows,
  * matching the exact visual height and structure of the original attached template!
@@ -360,11 +376,13 @@ function renderDocumentProductsTable() {
   // 1. Render actual filled rows
   items.forEach(item => {
     const tr = document.createElement('tr');
+    const rowTotal = calculateRowTotal(item.qty, item.price);
     tr.innerHTML = `
       <td class="td-code">${escapeHtml(item.code || '') || '&nbsp;'}</td>
       <td class="td-desc">${escapeHtml(item.description || '') || '&nbsp;'}</td>
       <td class="td-qty">${escapeHtml(item.qty ? String(item.qty) : '') || '&nbsp;'}</td>
       <td class="td-price">${escapeHtml(item.price || '') || '&nbsp;'}</td>
+      <td class="td-total">${escapeHtml(rowTotal) || '&nbsp;'}</td>
     `;
     dom.previewProductsTbody.appendChild(tr);
   });
@@ -379,6 +397,7 @@ function renderDocumentProductsTable() {
       <td class="td-desc">&nbsp;</td>
       <td class="td-qty">&nbsp;</td>
       <td class="td-price">&nbsp;</td>
+      <td class="td-total">&nbsp;</td>
     `;
     dom.previewProductsTbody.appendChild(tr);
   }
@@ -432,9 +451,16 @@ function renderProductRows() {
       <option value="__MANUAL__" ${isCustomQty ? 'selected' : ''}>Manual Input...</option>
     `;
 
+    const initialTotal = calculateRowTotal(prod.qty, prod.price);
+
     card.innerHTML = `
       <div class="product-row-header">
-        <span class="product-row-badge">Item #${index + 1}</span>
+        <div class="product-row-badge-group">
+          <span class="product-row-badge">Item #${index + 1}</span>
+          <span class="product-row-total-badge" id="product-total-badge-${index}" style="${initialTotal ? '' : 'display: none;'}">
+            Total: <strong>${escapeHtml(initialTotal)}</strong>
+          </span>
+        </div>
         ${state.products.length > 1 ? `
           <button type="button" class="btn-remove-row" data-index="${index}" title="Remove this product row">
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
@@ -492,6 +518,18 @@ function renderProductRows() {
     const customQtyInput = card.querySelector('.product-custom-qty-input');
     const priceInput = card.querySelector('.product-price-input');
     const removeBtn = card.querySelector('.btn-remove-row');
+    const totalBadge = card.querySelector(`#product-total-badge-${index}`);
+
+    const syncCardTotalBadge = () => {
+      if (!totalBadge) return;
+      const t = calculateRowTotal(state.products[index].qty, state.products[index].price);
+      if (t) {
+        totalBadge.innerHTML = `Total: <strong>${escapeHtml(t)}</strong>`;
+        totalBadge.style.display = 'inline-flex';
+      } else {
+        totalBadge.style.display = 'none';
+      }
+    };
 
     descSelect.addEventListener('change', e => {
       const val = e.target.value;
@@ -519,6 +557,7 @@ function renderProductRows() {
           }
         }
       }
+      syncCardTotalBadge();
       updateLivePreview();
     });
 
@@ -543,16 +582,19 @@ function renderProductRows() {
         customQtyWrapper.style.display = 'none';
         state.products[index].qty = val;
       }
+      syncCardTotalBadge();
       updateLivePreview();
     });
 
     customQtyInput.addEventListener('input', e => {
       state.products[index].qty = e.target.value;
+      syncCardTotalBadge();
       updateLivePreview();
     });
 
     priceInput.addEventListener('input', e => {
       state.products[index].price = e.target.value;
+      syncCardTotalBadge();
       updateLivePreview();
     });
 
@@ -563,6 +605,7 @@ function renderProductRows() {
         val = formatCurrency(val);
         e.target.value = val;
         state.products[index].price = val;
+        syncCardTotalBadge();
         updateLivePreview();
       }
     });

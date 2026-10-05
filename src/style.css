@@ -550,12 +550,27 @@ html, body {
   justify-content: space-between;
 }
 
+.product-row-badge-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .product-row-badge {
   font-size: 11px;
   font-weight: 700;
   color: var(--livsmed-navy-light);
   background-color: #e2e8f0;
   padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.product-row-total-badge {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--livsmed-navy);
+  background-color: rgba(0, 156, 219, 0.12);
+  padding: 2px 8px;
   border-radius: 4px;
 }
 
@@ -1045,17 +1060,25 @@ html, body {
 
 .th-qty,
 .td-qty {
-  width: 85px;
-  min-width: 85px;
-  max-width: 85px;
+  width: 65px;
+  min-width: 65px;
+  max-width: 65px;
   box-sizing: border-box;
 }
 
 .th-price,
 .td-price {
-  width: 125px;
-  min-width: 125px;
-  max-width: 125px;
+  width: 105px;
+  min-width: 105px;
+  max-width: 105px;
+  box-sizing: border-box;
+}
+
+.th-total,
+.td-total {
+  width: 110px;
+  min-width: 110px;
+  max-width: 110px;
   box-sizing: border-box;
 }
 
@@ -1080,7 +1103,12 @@ html, body {
 
 .td-price {
   text-align: left;
-  padding-left: 12px !important;
+  padding-left: 10px !important;
+}
+
+.td-total {
+  text-align: left;
+  padding-left: 10px !important;
 }
 
 /* 6. Comments Box */
