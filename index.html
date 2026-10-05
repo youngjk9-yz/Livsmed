@@ -93,22 +93,20 @@
                 <h3>General & Date</h3>
               </div>
               <div class="form-card-body">
-                <div class="form-row">
-                  <div class="form-group flex-1">
-                    <label for="input-quote-date">Date of Quote</label>
-                    <div class="input-with-action">
-                      <input type="text" id="input-quote-date" placeholder="e.g. 9/18/2026" value="9/18/2026" />
-                      <button type="button" id="btn-set-today" class="btn-input-addon" title="Set to today's date">Today</button>
-                    </div>
+                <div class="form-group">
+                  <label for="input-quote-date">Date of Quote</label>
+                  <div class="input-with-action">
+                    <input type="text" id="input-quote-date" placeholder="e.g. 9/18/2026" value="9/18/2026" />
+                    <button type="button" id="btn-set-today" class="btn-input-addon" title="Set to today's date">Today</button>
                   </div>
+                </div>
 
-                  <div class="form-group flex-1">
-                    <label for="input-idn-agreement">IDN Pricing Agreement (Y/N)</label>
-                    <select id="input-idn-agreement" class="form-select">
-                      <option value="Y" selected>Y — Yes, part of existing IDN</option>
-                      <option value="N">N — No IDN agreement</option>
-                    </select>
-                  </div>
+                <div class="form-group">
+                  <label for="input-idn-agreement">Is hospital part of existing IDN pricing agreement? (Y/N)</label>
+                  <select id="input-idn-agreement" class="form-select">
+                    <option value="Y" selected>Y — Yes (Part of existing IDN agreement)</option>
+                    <option value="N">N — No (Standard pricing)</option>
+                  </select>
                 </div>
               </div>
             </section>
@@ -142,15 +140,13 @@
                   <label for="input-contact-name">Key Contact Name</label>
                   <input type="text" id="input-contact-name" placeholder="e.g. Karen Gruhn" value="Karen Gruhn" />
                 </div>
-                <div class="form-row">
-                  <div class="form-group flex-1">
-                    <label for="input-contact-title">Title / Department</label>
-                    <input type="text" id="input-contact-title" placeholder="e.g. Director of Value Analysis" value="Director of Value Analysis" />
-                  </div>
-                  <div class="form-group flex-1">
-                    <label for="input-contact-phone">Phone Number</label>
-                    <input type="text" id="input-contact-phone" placeholder="e.g. tel:909-558-4081" value="tel:909-558-4081" />
-                  </div>
+                <div class="form-group">
+                  <label for="input-contact-title">Title / Department</label>
+                  <input type="text" id="input-contact-title" placeholder="e.g. Director of Value Analysis" value="Director of Value Analysis" />
+                </div>
+                <div class="form-group">
+                  <label for="input-contact-phone">Phone Number</label>
+                  <input type="text" id="input-contact-phone" placeholder="e.g. tel:909-558-4081" value="tel:909-558-4081" />
                 </div>
               </div>
             </section>
@@ -215,15 +211,13 @@
                   <label for="input-rep-name">Sales Rep Name</label>
                   <input type="text" id="input-rep-name" placeholder="e.g. Gerry Giuliano" value="Gerry Giuliano" />
                 </div>
-                <div class="form-row">
-                  <div class="form-group flex-1">
-                    <label for="input-rep-email">Email Address</label>
-                    <input type="email" id="input-rep-email" placeholder="e.g. Gerry_giuliano@livsmed.com" value="Gerry_giuliano@livsmed.com" />
-                  </div>
-                  <div class="form-group flex-1">
-                    <label for="input-rep-phone">Phone</label>
-                    <input type="text" id="input-rep-phone" placeholder="e.g. 908 328 2809" value="908 328 2809" />
-                  </div>
+                <div class="form-group">
+                  <label for="input-rep-email">Email Address</label>
+                  <input type="email" id="input-rep-email" placeholder="e.g. Gerry_giuliano@livsmed.com" value="Gerry_giuliano@livsmed.com" />
+                </div>
+                <div class="form-group">
+                  <label for="input-rep-phone">Phone Number</label>
+                  <input type="text" id="input-rep-phone" placeholder="e.g. 908 328 2809" value="908 328 2809" />
                 </div>
               </div>
             </section>
