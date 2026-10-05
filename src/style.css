@@ -938,9 +938,7 @@ html, body {
   box-sizing: border-box;
 }
 
-.doc-table td:empty::before,
-.soc-customer-line:empty::before,
-.soc-number-line:empty::before {
+.doc-table td:empty::before {
   content: '\00a0';
   display: inline-block;
 }
@@ -964,31 +962,28 @@ html, body {
   font-weight: 400;
 }
 
-/* 2. SOC # Table (Partial Width) */
+/* 2. Quote for Table (Partial Width) */
 .doc-table-soc {
   width: 480px;
   table-layout: fixed;
 }
 
+.facility-label-cell,
 .soc-label-cell {
   width: 140px;
   min-width: 140px;
   max-width: 140px;
   box-sizing: border-box;
-  text-align: center;
+  text-align: left;
   font-weight: 400;
+  line-height: 1.25;
 }
 
+.facility-val-cell,
 .soc-val-cell {
-  line-height: 1.4;
-}
-
-.soc-customer-line {
   font-weight: 400;
-}
-
-.soc-number-line {
-  font-weight: 400;
+  line-height: 1.35;
+  height: 25px;
 }
 
 /* 3. Contact Information Table (Partial Width) */
