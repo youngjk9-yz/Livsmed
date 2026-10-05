@@ -1,88 +1,90 @@
 // Product catalog management for LivsMed Quote Request Generator
-// Users can provide or update products later via the UI Catalog Manager
+// Updated with the official product codes, descriptions, and unit prices from LivsMed price list
 
 export const DEFAULT_PRODUCTS = [
   {
     code: '5ACF01-LP',
-    description: 'ArtiSential Clinch Forcep',
-    spec: '38cm, Pinch Lock',
-    defaultPrice: 1925
+    description: 'Clinch Forceps-38cm-Lock-Adjustable-Pinch lock',
+    defaultPrice: 385.00
   },
   {
     code: '5ACF01-LV',
-    description: 'ArtiSential Clinch Forcep (Lever Lock)',
-    spec: '38cm, Lever Lock',
-    defaultPrice: 1925
+    description: 'Clinch Forceps-38cm-Lock-Adjustable',
+    defaultPrice: 385.00
   },
   {
-    code: '5AFF01-LP',
-    description: 'ArtiSential Fenestrated Forcep',
-    spec: '38cm, Pinch Lock',
-    defaultPrice: 1925
+    code: '5AUF01-LP',
+    description: 'Fenestrated Forceps-38cm-Lock-Adjustable-Pinch lock',
+    defaultPrice: 385.00
   },
   {
-    code: '5AFF01-LV',
-    description: 'ArtiSential Fenestrated Forcep (Lever Lock)',
-    spec: '38cm, Lever Lock',
-    defaultPrice: 1925
+    code: '5AUF01-LV',
+    description: 'Fenestrated Forceps-38cm-Lock-Adjustable',
+    defaultPrice: 495.00
   },
   {
-    code: '5AMD01-LP',
-    description: 'ArtiSential Maryland Dissector',
-    spec: '38cm, Pinch Lock',
-    defaultPrice: 1925
+    code: '5AUD01-LV',
+    description: 'Maryland Dissector-38cm-Lock-Adjustable',
+    defaultPrice: 385.00
   },
   {
-    code: '5AMD01-LV',
-    description: 'ArtiSential Maryland Dissector (Lever Lock)',
-    spec: '38cm, Lever Lock',
-    defaultPrice: 1925
+    code: '5ANH01-LV',
+    description: 'Needle Holder-38cm-Lock-Adjustable',
+    defaultPrice: 385.00
   },
   {
-    code: '5ABF01-LP',
-    description: 'ArtiSential Bipolar Fenestrated Forcep',
-    spec: '38cm, Bipolar',
-    defaultPrice: 2150
+    code: '5ANH01-LV',
+    description: 'Needle Holder-38cm-Lock-Adjustable ($535)',
+    defaultPrice: 535.00
   },
   {
-    code: '5AMH01',
-    description: 'ArtiSential Monopolar Spatula / Hook',
-    spec: '38cm, Monopolar',
-    defaultPrice: 1850
+    code: '5ANH01S-LV',
+    description: 'Needle Holder-30cm-Lock-Adjustable',
+    defaultPrice: 495.00
   },
   {
-    code: '5ANH01',
-    description: 'ArtiSential Needle Holder',
-    spec: '38cm, Precision Jaw',
-    defaultPrice: 2200
+    code: 'ACA02-LV',
+    description: 'Clip Applier Large-38cm-Lock-Adjustable',
+    defaultPrice: 385.00
   },
   {
-    code: '5ACA01',
-    description: 'ArtiSential Clip Applier',
-    spec: '38cm, Medium/Large',
-    defaultPrice: 2350
+    code: 'ACA03-LV',
+    description: 'Clip Applier Large-38cm-Lock-Adjustable-With 10mm Trocar',
+    defaultPrice: 385.00
   },
   {
-    code: '8ACF01-LP',
-    description: 'ArtiSential 8mm Clinch Forcep',
-    spec: '8mm Shaft, Heavy Grip',
-    defaultPrice: 2050
+    code: '5AMHD01-LH',
+    description: 'Monopolar Hook-Down-38cm-Lock-Hand Control',
+    defaultPrice: 385.00
   },
   {
-    code: '8AFF01-LP',
-    description: 'ArtiSential 8mm Fenestrated Forcep',
-    spec: '8mm Shaft, Grasper',
-    defaultPrice: 2050
+    code: '5AMHL01-LH',
+    description: 'Monopolar Hook-Left-38cm-Lock-Hand Control',
+    defaultPrice: 385.00
   },
   {
-    code: 'AS-VS01',
-    description: 'ArtiSeal Vessel Sealing Instrument',
-    spec: 'Bipolar Advanced Sealer',
-    defaultPrice: 2450
+    code: '5AMHL01-LH',
+    description: 'Monopolar Hook-Left-38cm-Lock-Hand Control ($495)',
+    defaultPrice: 495.00
+  },
+  {
+    code: '5AMHU01-LH',
+    description: 'Monopolar Hook-Up-38cm_Lock-Hand Control',
+    defaultPrice: 385.00
+  },
+  {
+    code: 'ABD02-L',
+    description: 'Bipolar Precise Dissector-38cm-Lock',
+    defaultPrice: 585.00
+  },
+  {
+    code: 'Shipping',
+    description: 'Shipping & Handling',
+    defaultPrice: 79.33
   }
 ];
 
-const STORAGE_KEY = 'livsmed_quote_product_catalog_v1';
+const STORAGE_KEY = 'livsmed_quote_product_catalog_v2';
 
 export function getProductCatalog() {
   try {

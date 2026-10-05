@@ -17,9 +17,9 @@ const SAMPLE_DATA = {
   products: [
     {
       code: '5ACF01-LP',
-      description: 'ArtiSential Clinch Forcep',
+      description: 'Clinch Forceps-38cm-Lock-Adjustable-Pinch lock',
       qty: '1',
-      price: '$1,925'
+      price: '$385.00'
     }
   ],
   comments: '',
@@ -726,7 +726,7 @@ function formatCurrency(amount) {
   const num = Number(String(amount).replace(/[^0-9.-]+/g, ''));
   if (isNaN(num)) return amount;
   return '$' + num.toLocaleString('en-US', {
-    minimumFractionDigits: 0,
+    minimumFractionDigits: 2,
     maximumFractionDigits: 2
   });
 }
