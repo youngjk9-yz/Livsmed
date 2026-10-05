@@ -929,10 +929,14 @@ html, body {
 /* 1. Date of Quote Table */
 .date-table {
   width: 100%;
+  table-layout: fixed;
 }
 
 .date-label-cell {
-  width: 180px;
+  width: 140px;
+  min-width: 140px;
+  max-width: 140px;
+  box-sizing: border-box;
   font-weight: 400;
   white-space: nowrap;
 }
@@ -941,13 +945,17 @@ html, body {
   font-weight: 400;
 }
 
-/* 2. SOC # Table (Partial Width ~330px) */
+/* 2. SOC # Table (Partial Width) */
 .doc-table-soc {
-  width: 335px;
+  width: 480px;
+  table-layout: fixed;
 }
 
 .soc-label-cell {
-  width: 82px;
+  width: 140px;
+  min-width: 140px;
+  max-width: 140px;
+  box-sizing: border-box;
   text-align: center;
   font-weight: 400;
 }
@@ -964,14 +972,19 @@ html, body {
   font-weight: 400;
 }
 
-/* 3. Contact Information Table (Partial Width ~460px) */
+/* 3. Contact Information Table (Partial Width) */
 .doc-table-contact {
-  width: 470px;
+  width: 480px;
+  table-layout: fixed;
 }
 
 .contact-label-cell {
-  width: 135px;
+  width: 140px;
+  min-width: 140px;
+  max-width: 140px;
+  box-sizing: border-box;
   font-weight: 400;
+  white-space: nowrap;
   line-height: 1.25;
 }
 
@@ -982,13 +995,14 @@ html, body {
 /* 4. IDN Agreement Table */
 .idn-table {
   width: 100%;
+  table-layout: fixed;
 }
 
 .idn-label-cell {
   text-align: left;
   padding: 6px 10px;
   line-height: 1.35;
-  width: 82%;
+  width: auto;
 }
 
 .idn-sublabel {
@@ -996,7 +1010,7 @@ html, body {
 }
 
 .idn-val-cell {
-  width: 18%;
+  width: 120px;
   text-align: center;
   font-size: 11.5pt;
   font-weight: 400;
@@ -1005,6 +1019,7 @@ html, body {
 /* 5. Products Table */
 .products-table {
   width: 100%;
+  table-layout: fixed;
 }
 
 .products-table thead th {
@@ -1015,10 +1030,34 @@ html, body {
   background-color: transparent;
 }
 
-.th-code { width: 17%; }
-.th-desc { width: 50%; }
-.th-qty { width: 13%; }
-.th-price { width: 20%; }
+.th-code,
+.td-code {
+  width: 140px;
+  min-width: 140px;
+  max-width: 140px;
+  box-sizing: border-box;
+}
+
+.th-desc,
+.td-desc {
+  width: auto;
+}
+
+.th-qty,
+.td-qty {
+  width: 85px;
+  min-width: 85px;
+  max-width: 85px;
+  box-sizing: border-box;
+}
+
+.th-price,
+.td-price {
+  width: 125px;
+  min-width: 125px;
+  max-width: 125px;
+  box-sizing: border-box;
+}
 
 .products-table tbody td {
   height: 25px;
@@ -1059,14 +1098,19 @@ html, body {
   white-space: pre-wrap;
 }
 
-/* 7. LivsMed Sales Rep Information Table (Partial Width ~470px) */
+/* 7. LivsMed Sales Rep Information Table (Partial Width) */
 .doc-table-rep {
-  width: 485px;
+  width: 480px;
+  table-layout: fixed;
 }
 
 .rep-label-cell {
   width: 140px;
+  min-width: 140px;
+  max-width: 140px;
+  box-sizing: border-box;
   font-weight: 400;
+  white-space: nowrap;
 }
 
 .rep-val-cell {
