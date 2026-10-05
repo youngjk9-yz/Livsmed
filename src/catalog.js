@@ -1,5 +1,5 @@
 // Product catalog management for LivsMed Quote Request Generator
-// Updated with the complete list of products, codes, and unit prices from LivsMed
+// Updated with complete deduplicated product list including new models
 
 export const DEFAULT_PRODUCTS = [
   {
@@ -15,6 +15,11 @@ export const DEFAULT_PRODUCTS = [
   {
     code: 'ACA03-LV',
     description: 'Clip Applier Large-38cm-Lock-Adjustable-With 10mm Trocar',
+    defaultPrice: 385.00
+  },
+  {
+    code: 'ACA03-PG',
+    description: 'Clip Applier Large-38cm-Pistol Grip',
     defaultPrice: 385.00
   },
   {
@@ -36,6 +41,11 @@ export const DEFAULT_PRODUCTS = [
     code: '5AUF01-LV',
     description: 'Fenestrated Forceps-38cm-Lock-Adjustable',
     defaultPrice: 385.00
+  },
+  {
+    code: '5AUF01S-LV',
+    description: 'Fenestrated Forceps-30cm-Lock-Adjustable',
+    defaultPrice: 400.00
   },
   {
     code: '5AUD01-LV',
@@ -71,6 +81,11 @@ export const DEFAULT_PRODUCTS = [
     code: '5AMHD01-LH',
     description: 'Monopolar Hook-Down-38cm-Lock-Hand Control',
     defaultPrice: 385.00
+  },
+  {
+    code: '5AMHD01S-LH',
+    description: 'Monopolar Hook-Down-30cm-Lock-Hand Control',
+    defaultPrice: 400.00
   },
   {
     code: '5AMHL01-LH',
@@ -118,18 +133,25 @@ export const DEFAULT_PRODUCTS = [
     defaultPrice: 385.00
   },
   {
+    code: 'ABD02-L',
+    description: 'Bipolar Precise Dissector-38cm-Lock',
+    defaultPrice: 585.00
+  },
+  {
     code: 'Shipping',
     description: 'Shipping & Handling',
     defaultPrice: 749.41
   }
 ];
 
-const STORAGE_KEY = 'livsmed_quote_product_catalog_v3';
+const STORAGE_KEY = 'livsmed_quote_product_catalog_v5';
 
-// Clear legacy caches to ensure old products are completely removed
+// Clear legacy caches to ensure latest deduplicated list loads immediately
 try {
   localStorage.removeItem('livsmed_quote_product_catalog_v1');
   localStorage.removeItem('livsmed_quote_product_catalog_v2');
+  localStorage.removeItem('livsmed_quote_product_catalog_v3');
+  localStorage.removeItem('livsmed_quote_product_catalog_v4');
 } catch (e) {
   // ignore
 }
