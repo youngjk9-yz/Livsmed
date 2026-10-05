@@ -108,6 +108,17 @@
                   <label for="input-soc-number">SOC # (Sales Order / Account #)</label>
                   <input type="text" id="input-soc-number" placeholder="e.g. 303406138" value="" />
                 </div>
+                <div class="form-group">
+                  <label for="input-facility-address">Address</label>
+                  <textarea id="input-facility-address" rows="2" placeholder="e.g. 11234 Anderson St, Loma Linda, CA 92354"></textarea>
+                </div>
+                <div class="form-group">
+                  <div class="form-label-row">
+                    <label for="input-shipping-address">Shipping Address</label>
+                    <button type="button" class="btn-text-link" id="btn-copy-address">Same as Address</button>
+                  </div>
+                  <textarea id="input-shipping-address" rows="2" placeholder="e.g. 11234 Anderson St, Loading Dock, Loma Linda, CA 92354"></textarea>
+                </div>
               </div>
             </section>
 
@@ -288,6 +299,14 @@
                       <tr>
                         <td class="cell-label soc-label-cell">SOC #</td>
                         <td class="cell-val soc-val-cell" id="preview-soc-number"></td>
+                      </tr>
+                      <tr>
+                        <td class="cell-label address-label-cell">Address</td>
+                        <td class="cell-val address-val-cell" id="preview-facility-address"></td>
+                      </tr>
+                      <tr>
+                        <td class="cell-label shipping-label-cell">Shipping Address</td>
+                        <td class="cell-val shipping-val-cell" id="preview-shipping-address"></td>
                       </tr>
                     </tbody>
                   </table>

@@ -10,6 +10,8 @@ const EMPTY_STATE = {
   quoteDate: '',
   customerName: '',
   socNumber: '',
+  facilityAddress: '',
+  shippingAddress: '',
   contactName: '',
   contactTitle: '',
   contactPhone: '',
@@ -50,6 +52,9 @@ const dom = {
   idnAgreement: document.getElementById('input-idn-agreement'),
   customerName: document.getElementById('input-customer-name'),
   socNumber: document.getElementById('input-soc-number'),
+  facilityAddress: document.getElementById('input-facility-address'),
+  shippingAddress: document.getElementById('input-shipping-address'),
+  btnCopyAddress: document.getElementById('btn-copy-address'),
   contactName: document.getElementById('input-contact-name'),
   contactTitle: document.getElementById('input-contact-title'),
   contactPhone: document.getElementById('input-contact-phone'),
@@ -64,6 +69,8 @@ const dom = {
   previewQuoteDate: document.getElementById('preview-quote-date'),
   previewCustomerName: document.getElementById('preview-customer-name'),
   previewSocNumber: document.getElementById('preview-soc-number'),
+  previewFacilityAddress: document.getElementById('preview-facility-address'),
+  previewShippingAddress: document.getElementById('preview-shipping-address'),
   previewContactName: document.getElementById('preview-contact-name'),
   previewContactTitle: document.getElementById('preview-contact-title'),
   previewContactPhone: document.getElementById('preview-contact-phone'),
@@ -157,6 +164,27 @@ function setupEventListeners() {
     state.socNumber = e.target.value;
     dom.previewSocNumber.textContent = state.socNumber || '';
   });
+
+  dom.facilityAddress.addEventListener('input', e => {
+    state.facilityAddress = e.target.value;
+    dom.previewFacilityAddress.textContent = state.facilityAddress || '';
+  });
+
+  dom.shippingAddress.addEventListener('input', e => {
+    state.shippingAddress = e.target.value;
+    dom.previewShippingAddress.textContent = state.shippingAddress || '';
+  });
+
+  if (dom.btnCopyAddress) {
+    dom.btnCopyAddress.addEventListener('click', () => {
+      if (dom.facilityAddress && dom.facilityAddress.value) {
+        state.shippingAddress = dom.facilityAddress.value;
+        dom.shippingAddress.value = state.shippingAddress;
+        dom.previewShippingAddress.textContent = state.shippingAddress;
+        showToast('Shipping address copied from Address', 'info');
+      }
+    });
+  }
 
   dom.contactName.addEventListener('input', e => {
     state.contactName = e.target.value;
@@ -322,6 +350,8 @@ function populateFormFields() {
   dom.idnAgreement.value = state.idnAgreement;
   dom.customerName.value = state.customerName;
   dom.socNumber.value = state.socNumber;
+  dom.facilityAddress.value = state.facilityAddress || '';
+  dom.shippingAddress.value = state.shippingAddress || '';
   dom.contactName.value = state.contactName;
   dom.contactTitle.value = state.contactTitle;
   dom.contactPhone.value = state.contactPhone;
@@ -335,6 +365,8 @@ function updateLivePreview() {
   dom.previewQuoteDate.textContent = state.quoteDate || '';
   dom.previewCustomerName.textContent = state.customerName || '';
   dom.previewSocNumber.textContent = state.socNumber || '';
+  dom.previewFacilityAddress.textContent = state.facilityAddress || '';
+  dom.previewShippingAddress.textContent = state.shippingAddress || '';
   dom.previewContactName.textContent = state.contactName || '';
   dom.previewContactTitle.textContent = state.contactTitle || '';
   dom.previewContactPhone.textContent = state.contactPhone || '';
