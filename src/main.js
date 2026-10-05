@@ -209,17 +209,19 @@ function setupEventListeners() {
     updateLivePreview();
   });
 
-  // Load Sample & Clear Form
-  dom.btnLoadSample.addEventListener('click', () => {
-    state = {
-      ...state,
-      ...JSON.parse(JSON.stringify(SAMPLE_DATA))
-    };
-    populateFormFields();
-    renderProductRows();
-    updateLivePreview();
-    showToast('Loaded Loma Linda University quote sample', 'success');
-  });
+  // Clear Form
+  if (dom.btnLoadSample) {
+    dom.btnLoadSample.addEventListener('click', () => {
+      state = {
+        ...state,
+        ...JSON.parse(JSON.stringify(SAMPLE_DATA))
+      };
+      populateFormFields();
+      renderProductRows();
+      updateLivePreview();
+      showToast('Loaded Loma Linda University quote sample', 'success');
+    });
+  }
 
   dom.btnClearForm.addEventListener('click', () => {
     state.quoteDate = '';
