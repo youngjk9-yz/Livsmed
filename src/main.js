@@ -30,7 +30,7 @@ const SAMPLE_DATA = {
 
 const QTY_OPTIONS = [
   '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
-  '12', '15', '20', '25', '30', '40', '50', '100'
+  '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'
 ];
 
 let state = {
@@ -423,7 +423,7 @@ function renderProductRows() {
       </option>
     `;
 
-    // Build Qty dropdown options
+    // Build Qty dropdown options: 1 to 20, plus Manual Input option at the bottom
     let qtyOptionsHtml = '';
     const currentQtyStr = String(prod.qty || '1');
     let isQtyMatched = false;
@@ -434,9 +434,11 @@ function renderProductRows() {
       qtyOptionsHtml += `<option value="${opt}" ${isSel}>${opt}</option>`;
     });
 
-    if (!isQtyMatched && prod.qty) {
-      qtyOptionsHtml += `<option value="${escapeHtml(currentQtyStr)}" selected>${escapeHtml(currentQtyStr)} (Custom)</option>`;
-    }
+    const isCustomQty = !isQtyMatched && Boolean(prod.qty);
+
+    qtyOptionsHtml += `
+      <option value="__MANUAL__" ${isCustomQty ? 'selected' : ''}>Manual Input...</option>
+    `;
 
     card.innerHTML = `
       <div class="product-row-header">
@@ -471,11 +473,14 @@ function renderProductRows() {
           <input type="text" class="product-code-input" data-index="${index}" placeholder="e.g. 5ACF01-LP" value="${escapeHtml(prod.code || '')}" />
         </div>
 
-        <div class="form-group">
+        <div class="form-group qty-form-group">
           <label>Qty (Case)</label>
           <select class="product-qty-select form-select" data-index="${index}">
             ${qtyOptionsHtml}
           </select>
+          <div class="product-custom-qty-wrapper" style="display: ${isCustomQty ? 'block' : 'none'};">
+            <input type="number" min="1" step="1" class="product-custom-qty-input" data-index="${index}" placeholder="Qty #" value="${isCustomQty ? escapeHtml(currentQtyStr) : ''}" />
+          </div>
         </div>
 
         <div class="form-group">
@@ -491,6 +496,8 @@ function renderProductRows() {
     const customDescInput = card.querySelector('.product-custom-desc-input');
     const codeInput = card.querySelector('.product-code-input');
     const qtySelect = card.querySelector('.product-qty-select');
+    const customQtyWrapper = card.querySelector('.product-custom-qty-wrapper');
+    const customQtyInput = card.querySelector('.product-custom-qty-input');
     const priceInput = card.querySelector('.product-price-input');
     const removeBtn = card.querySelector('.btn-remove-row');
 
@@ -534,6 +541,20 @@ function renderProductRows() {
     });
 
     qtySelect.addEventListener('change', e => {
+      const val = e.target.value;
+      if (val === '__MANUAL__') {
+        customQtyWrapper.style.display = 'block';
+        customQtyInput.focus();
+        customQtyInput.select();
+        state.products[index].qty = customQtyInput.value || '';
+      } else {
+        customQtyWrapper.style.display = 'none';
+        state.products[index].qty = val;
+      }
+      updateLivePreview();
+    });
+
+    customQtyInput.addEventListener('input', e => {
       state.products[index].qty = e.target.value;
       updateLivePreview();
     });
