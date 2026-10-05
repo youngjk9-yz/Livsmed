@@ -995,21 +995,12 @@ html, body {
   width: 100%;
   padding: 6px 8px;
   box-sizing: border-box;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 .comments-text {
   font-size: 10pt;
   line-height: 1.35;
   white-space: pre-wrap;
-}
-
-.comments-line-divider {
-  border-bottom: 1px solid #000000;
-  margin: 12px -8px 0 -8px;
 }
 
 /* 7. LivsMed Sales Rep Information Table (Partial Width ~470px) */
