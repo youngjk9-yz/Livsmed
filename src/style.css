@@ -929,14 +929,14 @@ html, body {
 }
 
 .idn-label-cell {
-  text-align: center;
-  padding: 6px 12px;
+  text-align: left;
+  padding: 6px 10px;
   line-height: 1.35;
   width: 82%;
 }
 
 .idn-sublabel {
-  display: block;
+  display: inline;
 }
 
 .idn-val-cell {
